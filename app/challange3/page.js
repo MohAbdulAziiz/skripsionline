@@ -8,14 +8,14 @@ import Footer from '../../components/Footer';
 const PageContent = styled.div`
   padding: 80px 20px;
   text-align: center;
-  background-color: #f4f4f4;
+  background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
   min-height: calc(100vh - 120px);
 `;
 
 const ClassesContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   flex-wrap: wrap;
   margin-top: 40px;
 `;
@@ -23,29 +23,30 @@ const ClassesContainer = styled.div`
 const ClassCard = styled.div`
   background: white;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
   text-align: center;
-  width: 300px;
-  transition: transform 0.3s ease;
+  width: 320px;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
   &:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
   }
 `;
 
 const ClassTitle = styled.h3`
-  background-color: #3498db;
+  background-color: #0077c2;
   color: white;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 8px;
   margin-bottom: 15px;
 `;
 
 const ProfileContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
 `;
 
@@ -60,30 +61,28 @@ const ProfileImage = styled.img`
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ddd;
+  border: 3px solid #0077c2;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const classmates = {
   'Kelas SI': [
-    { name: 'Andi', image: '/aziz.jpeg' },
-    { name: 'Budi', image: '/aziz.jpeg' },
-    { name: 'Citra', image: '/aziz.jpeg' },
-    { name: 'Dina', image: '/aziz.jpeg' },
-    { name: 'Eka', image: '/aziz.jpeg' }
+    { name: 'Andi', image: '/contoh1.jpg' },
+    { name: 'Budi', image: '/contoh2.jpg' },
+    { name: 'Citra', image: '/contoh3.jpg' }
   ],
   'Kelas KA': [
-    { name: 'Faisal', image: '/aziz.jpeg' },
-    { name: 'Gita', image: '/aziz.jpeg' },
-    { name: 'Hana', image: '/aziz.jpeg' },
-    { name: 'Ivan', image: '/aziz.jpeg' },
-    { name: 'Joko', image: '/aziz.jpeg' }
+    { name: 'Faisal', image: '/contoh4.jpg' },
+    { name: 'Gita', image: '/contoh2.jpg' },
+    { name: 'Hana', image: '/contoh6.jpg' }
   ],
   'Kelas BD': [
-    { name: 'Kiki', image: '/aziz.jpeg' },
-    { name: 'Lina', image: '/aziz.jpeg' },
-    { name: 'Mira', image: '/aziz.jpeg' },
-    { name: 'Nanda', image: '/aziz.jpeg' },
-    { name: 'Omar', image: '/aziz.jpeg' }
+    { name: 'Kiki', image: '/contoh7.jpg' },
+    { name: 'Lina', image: '/contoh8.jpg' },
+    { name: 'Mira', image: '/contoh9.jpg' }
   ]
 };
 
@@ -93,28 +92,35 @@ const Modal = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
 `;
 
 const ModalContent = styled.div`
   background: white;
-  padding: 30px;
-  border-radius: 10px;
+  padding: 35px;
+  border-radius: 12px;
   text-align: center;
-  width: 700px;
+  width: 600px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
 `;
 
 const CloseButton = styled.button`
-  margin-top: 10px;
-  padding: 5px 10px;
+  margin-top: 15px;
+  padding: 8px 15px;
   border: none;
-  background: red;
+  background: #d32f2f;
   color: white;
-  border-radius: 5px;
+  font-size: 16px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background 0.3s ease;
+  &:hover {
+    background: #b71c1c;
+  }
 `;
 
 export default function Home() {
@@ -124,7 +130,7 @@ export default function Home() {
     <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
       <Header />
       <PageContent>
-        <h2 style={{ marginTop: '40px' }}>Best Friends in Each Class</h2>
+        <h2 style={{ marginTop: '40px', color: '#003c8f' }}>Best Friends in Each Class</h2>
         <ClassesContainer>
           {Object.entries(classmates).map(([className, students]) => (
             <ClassCard key={className} onClick={() => setSelectedClass({ className, students })}>
@@ -143,13 +149,13 @@ export default function Home() {
       {selectedClass && (
         <Modal onClick={() => setSelectedClass(null)}>
           <ModalContent onClick={(e) => e.stopPropagation()}>
-            <h3>{selectedClass.className}</h3>
+            <h3 style={{ color: '#003c8f' }}>{selectedClass.className}</h3>
             <ProfileContainer>
               {selectedClass.students.map((student, index) => (
                 <ProfileWrapper key={index}>
                   <ProfileImage src={student.image} alt={student.name} />
-                  <p>{student.name}</p>
-                  <p>{selectedClass.className}</p>
+                  <p style={{ fontSize: '18px', fontWeight: 'bold', color: '#0077c2' }}>{student.name}</p>
+                  <p style={{ fontSize: '14px', color: '#555' }}>{selectedClass.className}</p>
                 </ProfileWrapper>
               ))}
             </ProfileContainer>
