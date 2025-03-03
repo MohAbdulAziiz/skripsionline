@@ -38,11 +38,11 @@ const Section = styled.div`
 `;
 
 const sections = [
-  { id: 'bab1', title: 'BAB 1 - Pendahuluan', content: 'Latar belakang penelitian dan tujuan penelitian.' },
-  { id: 'bab2', title: 'BAB 2 - Kajian Pustaka', content: 'Pembahasan teori dan referensi yang relevan.' },
-  { id: 'bab3', title: 'BAB 3 - Metodologi Penelitian', content: 'Metode yang digunakan dalam penelitian.' },
-  { id: 'bab4', title: 'BAB 4 - Hasil dan Pembahasan', content: 'Hasil penelitian serta analisisnya.' },
-  { id: 'bab5', title: 'BAB 5 - Kesimpulan dan Saran', content: 'Kesimpulan serta saran penelitian selanjutnya.' },
+  { id: 'bab1', title: 'BAB 1 - Pendahuluan', content: 'Bab ini menjelaskan latar belakang penelitian, rumusan masalah, tujuan penelitian, serta manfaat penelitian. Pendahuluan memberikan gambaran mengenai alasan utama penelitian ini dilakukan dan urgensi dari topik yang dipilih. Latar belakang menjelaskan fenomena yang melatarbelakangi penelitian, rumusan masalah merangkum permasalahan utama yang akan dipecahkan, tujuan penelitian menentukan hasil yang ingin dicapai, dan manfaat penelitian menguraikan dampak positif yang diharapkan dari penelitian ini.' },
+  { id: 'bab2', title: 'BAB 2 - Kajian Pustaka', content: 'Pada bab ini dibahas teori-teori yang relevan dengan penelitian yang dilakukan. Kajian pustaka mencakup referensi dari penelitian sebelumnya, konsep-konsep utama yang mendukung penelitian, serta dasar hukum atau regulasi yang berkaitan dengan topik yang diangkat. Bab ini berfungsi sebagai landasan teoritis yang akan digunakan dalam menganalisis hasil penelitian, dengan mengacu pada berbagai sumber yang kredibel dan relevan.' },
+  { id: 'bab3', title: 'BAB 3 - Metodologi Penelitian', content: 'Bab ini menjelaskan metode yang digunakan dalam penelitian, termasuk jenis penelitian yang diterapkan (kualitatif atau kuantitatif), teknik pengumpulan data seperti wawancara, survei, atau studi literatur, populasi dan sampel penelitian, serta teknik analisis data yang digunakan untuk mengolah informasi yang diperoleh. Metodologi penelitian harus sesuai dengan tujuan yang telah dirumuskan sebelumnya agar hasil yang diperoleh valid dan dapat dipertanggungjawabkan.' },
+  { id: 'bab4', title: 'BAB 4 - Hasil dan Pembahasan', content: 'Pada bab ini dipaparkan hasil penelitian yang telah dilakukan, baik dalam bentuk tabel, grafik, maupun deskripsi naratif. Pembahasan berisi analisis mendalam terhadap hasil yang diperoleh, dikaitkan dengan teori yang telah dijelaskan dalam kajian pustaka. Analisis ini bertujuan untuk menginterpretasikan data, mengidentifikasi temuan-temuan utama, serta menjelaskan implikasi dari hasil yang didapat.' },
+  { id: 'bab5', title: 'BAB 5 - Kesimpulan dan Saran', content: 'Bab terakhir berisi kesimpulan yang diperoleh dari hasil penelitian serta saran untuk penelitian selanjutnya atau penerapan dalam dunia nyata. Kesimpulan harus menjawab rumusan masalah yang telah dikemukakan pada pendahuluan, sementara saran memberikan rekomendasi bagi peneliti berikutnya atau pihak yang berkepentingan terkait penerapan hasil penelitian ini dalam konteks praktis.' }
 ];
 
 export default function SkripsiPage() {
