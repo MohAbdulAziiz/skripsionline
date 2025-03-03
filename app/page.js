@@ -1,76 +1,107 @@
 'use client';
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
-export default function AboutMe() {
+const PageWrapper = styled.div`
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+`;
+
+const PageContent = styled.div`
+  padding: 140px 20px 20px; /* Memberi ruang tambahan agar header tidak tertutup */
+  background-color: #f4f4f4;
+  min-height: calc(100vh - 120px);
+`;
+
+const StickyContainer = styled.div`
+  position: fixed;
+  top: 60px; /* Menempatkan sticky di bawah header */
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+`;
+
+const Section = styled.div`
+  padding: 40px;
+  margin: 20px 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+`;
+
+const sections = [
+  { 
+    id: 'bab1', 
+    title: 'BAB 1 - Pendahuluan', 
+    content: 'Bab ini menjelaskan latar belakang penelitian, rumusan masalah, tujuan penelitian, serta manfaat penelitian. Pendahuluan memberikan gambaran mengenai alasan utama penelitian ini dilakukan dan urgensi dari topik yang dipilih.' 
+  },
+  { 
+    id: 'bab2', 
+    title: 'BAB 2 - Kajian Pustaka', 
+    content: 'Pada bab ini dibahas teori-teori yang relevan dengan penelitian yang dilakukan. Kajian pustaka mencakup referensi dari penelitian sebelumnya, konsep-konsep utama, serta dasar hukum atau regulasi yang berkaitan dengan topik penelitian.' 
+  },
+  { 
+    id: 'bab3', 
+    title: 'BAB 3 - Metodologi Penelitian', 
+    content: 'Bab ini menjelaskan metode yang digunakan dalam penelitian, termasuk jenis penelitian, teknik pengumpulan data, populasi dan sampel, serta teknik analisis data. Metodologi yang dipilih harus sesuai dengan tujuan penelitian yang telah dirumuskan sebelumnya.' 
+  },
+  { 
+    id: 'bab4', 
+    title: 'BAB 4 - Hasil dan Pembahasan', 
+    content: 'Pada bab ini dipaparkan hasil penelitian yang telah dilakukan, baik dalam bentuk tabel, grafik, maupun deskripsi. Pembahasan berisi analisis mendalam terhadap hasil yang diperoleh, dikaitkan dengan teori yang telah dijelaskan dalam kajian pustaka.' 
+  },
+  { 
+    id: 'bab5', 
+    title: 'BAB 5 - Kesimpulan dan Saran', 
+    content: 'Bab terakhir berisi kesimpulan yang diperoleh dari hasil penelitian serta saran untuk penelitian selanjutnya atau penerapan dalam dunia nyata. Kesimpulan harus menjawab rumusan masalah yang telah dikemukakan pada pendahuluan.' 
+  }
+];
+
+export default function SkripsiPage() {
+  const [currentHeading, setCurrentHeading] = useState(sections[0].title);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let activeSection = sections[0].title;
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        const element = document.getElementById(section.id);
+        if (element && element.getBoundingClientRect().top <= 100) {
+          activeSection = section.title;
+          break;
+        }
+      }
+      setCurrentHeading(activeSection);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="relative flex flex-col min-h-screen bg-gray-100 overflow-hidden">
-      {/* Header tetap di atas */}
-      <div className="fixed top-0 w-full z-50 bg-white shadow-md">
-        <Header />
-      </div>
-
-      {/* Split Screen Layout */}
-      <div className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full">
-        
-        {/* Bagian Kiri - Background dengan Foto */}
-        <div className="relative w-full md:w-1/2 min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Image */}
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/aziz.jpeg')" }}>
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900/60 to-transparent backdrop-blur-lg"></div>
-          </div>
-          
-          {/* Foto Profil dengan efek glassmorphism */}
-          <div className="relative z-10 flex flex-col items-center p-6 bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30">
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-xl border-4 border-white transform hover:scale-105 transition-all duration-300">
-              <Image
-                src="/aziz.jpeg"
-                alt="Profile Picture"
-                width={256}
-                height={256}
-                className="object-cover w-full h-full"
-                priority
-              />
-            </div>
-            <h2 className="text-white mt-4 text-xl font-semibold">Moh. Abdul Aziz</h2>
-            <p className="text-gray-300 text-sm">UI/UX Designer & Developer</p>
-          </div>
-        </div>
-
-        {/* Bagian Kanan - Teks */}
-        <div className="w-full md:w-1/2 flex flex-col items-start justify-center bg-white/90 backdrop-blur-lg min-h-screen rounded-lg shadow-lg">
-          <div className="p-8 md:p-16">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">About Me</h1>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              I am a passionate UI/UX designer and developer who loves crafting
-              beautiful and functional web experiences. With a keen eye for design 
-              and strong technical skills, I bring ideas to life through creativity 
-              and technology.
-            </p>
-            <div className="mt-6 flex space-x-4">
-              <a 
-                href="#"
-                className="px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-lg transition-all duration-300"
-              >
-                View My Work
-              </a>
-              <a 
-                href="#"
-                className="px-6 py-3 text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white rounded-lg shadow-lg transition-all duration-300"
-              >
-                Contact Me
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="relative z-10">
-        <Footer />
-      </div>
-    </div>
+    <PageWrapper>
+      <Header />
+      <StickyContainer>{currentHeading}</StickyContainer>
+      <PageContent>
+        {sections.map((section) => (
+          <Section key={section.id} id={section.id}>
+            <h2>{section.title}</h2>
+            <p>{section.content}</p>
+          </Section>
+        ))}
+      </PageContent>
+      <Footer />
+    </PageWrapper>
   );
 }
