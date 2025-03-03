@@ -10,14 +10,14 @@ const PageWrapper = styled.div`
 `;
 
 const PageContent = styled.div`
-  padding: 140px 20px 20px; /* Memberi ruang tambahan agar header tidak tertutup */
+  padding: 80px 20px 20px;
   background-color: #f4f4f4;
-  min-height: calc(100vh - 120px);
+  min-height: 100vh;
 `;
 
 const StickyContainer = styled.div`
   position: fixed;
-  top: 60px; /* Menempatkan sticky di bawah header */
+  top: 0;
   left: 0;
   width: 100%;
   background: white;
@@ -38,31 +38,11 @@ const Section = styled.div`
 `;
 
 const sections = [
-  { 
-    id: 'bab1', 
-    title: 'BAB 1 - Pendahuluan', 
-    content: 'Bab ini menjelaskan latar belakang penelitian, rumusan masalah, tujuan penelitian, serta manfaat penelitian. Pendahuluan memberikan gambaran mengenai alasan utama penelitian ini dilakukan dan urgensi dari topik yang dipilih.' 
-  },
-  { 
-    id: 'bab2', 
-    title: 'BAB 2 - Kajian Pustaka', 
-    content: 'Pada bab ini dibahas teori-teori yang relevan dengan penelitian yang dilakukan. Kajian pustaka mencakup referensi dari penelitian sebelumnya, konsep-konsep utama, serta dasar hukum atau regulasi yang berkaitan dengan topik penelitian.' 
-  },
-  { 
-    id: 'bab3', 
-    title: 'BAB 3 - Metodologi Penelitian', 
-    content: 'Bab ini menjelaskan metode yang digunakan dalam penelitian, termasuk jenis penelitian, teknik pengumpulan data, populasi dan sampel, serta teknik analisis data. Metodologi yang dipilih harus sesuai dengan tujuan penelitian yang telah dirumuskan sebelumnya.' 
-  },
-  { 
-    id: 'bab4', 
-    title: 'BAB 4 - Hasil dan Pembahasan', 
-    content: 'Pada bab ini dipaparkan hasil penelitian yang telah dilakukan, baik dalam bentuk tabel, grafik, maupun deskripsi. Pembahasan berisi analisis mendalam terhadap hasil yang diperoleh, dikaitkan dengan teori yang telah dijelaskan dalam kajian pustaka.' 
-  },
-  { 
-    id: 'bab5', 
-    title: 'BAB 5 - Kesimpulan dan Saran', 
-    content: 'Bab terakhir berisi kesimpulan yang diperoleh dari hasil penelitian serta saran untuk penelitian selanjutnya atau penerapan dalam dunia nyata. Kesimpulan harus menjawab rumusan masalah yang telah dikemukakan pada pendahuluan.' 
-  }
+  { id: 'bab1', title: 'BAB 1 - Pendahuluan', content: 'Latar belakang penelitian dan tujuan penelitian.' },
+  { id: 'bab2', title: 'BAB 2 - Kajian Pustaka', content: 'Pembahasan teori dan referensi yang relevan.' },
+  { id: 'bab3', title: 'BAB 3 - Metodologi Penelitian', content: 'Metode yang digunakan dalam penelitian.' },
+  { id: 'bab4', title: 'BAB 4 - Hasil dan Pembahasan', content: 'Hasil penelitian serta analisisnya.' },
+  { id: 'bab5', title: 'BAB 5 - Kesimpulan dan Saran', content: 'Kesimpulan serta saran penelitian selanjutnya.' },
 ];
 
 export default function SkripsiPage() {
@@ -71,7 +51,7 @@ export default function SkripsiPage() {
   useEffect(() => {
     const handleScroll = () => {
       let activeSection = sections[0].title;
-      
+
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         const element = document.getElementById(section.id);
@@ -89,7 +69,6 @@ export default function SkripsiPage() {
 
   return (
     <PageWrapper>
-      <Header />
       <StickyContainer>{currentHeading}</StickyContainer>
       <PageContent>
         {sections.map((section) => (
@@ -99,7 +78,6 @@ export default function SkripsiPage() {
           </Section>
         ))}
       </PageContent>
-      <Footer />
     </PageWrapper>
   );
 }
